@@ -90,6 +90,7 @@ Lv.2の仕様を拡張し、任意の数のモーダルを表示できるよう�
 ## 発展課題
 余力のある人は以下の課題にも取り組んでみてください。
 
+- モーダル表示中に下の画面がスクロールされないようにロックしてください。
 - tailwindcssによるスタイリングを行ってください。
 - [<script setup>](https://github.com/vuejs/rfcs/blob/sfc-improvements/active-rfcs/0000-sfc-script-setup.md) に挑戦してください。
 - jestを用いてテストを書いてください（ぶっちゃけこれは難しいので、軽い気持ちで手を出すことはおすすめしません ）。
