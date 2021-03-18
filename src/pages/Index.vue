@@ -1,27 +1,30 @@
 <template>
   <img alt="Vue logo" src="/~/assets/logo.png" />
-  <button @click="visible = true">モーダルを開く</button>
+  <button @click="show" :disabled="modals.length === 0">モーダルを開く</button>
+  <button @click="createModal(`Modal${modals.length + 1}`)">
+    モーダルを追加
+  </button>
+  <div v-for="modal in modals">
+    <label :for="modal.name">{{ modal.name }}</label>
+    <input :id="modal.name" type="checkbox" v-model="modal.active" />
+  </div>
   <teleport to="#modal">
-    <div v-if="visible" class="overlay" @click="visible = false">
-      <section class="modal" @click.stop>
-        <h2>もーだる</h2>
-        <button @click="visible = false">モーダルを閉じる</button>
-      </section>
+    <div v-if="visible" class="overlay" @click="dismiss">
+      <template v-for="modal in modals">
+        <ModalWindow class="center" v-if="modal.visible" :name="modal.name" />
+      </template>
     </div>
   </teleport>
 </template>
 
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
+<script setup lang="ts">
+import { useCreateModal, useModals } from '~/composables/modal'
+import { useOverlay } from '~/composables/overlay'
+import ModalWindow from '~/components/ModalWindow.vue'
 
-export default defineComponent({
-  setup: () => {
-    const visible = ref<boolean>(false)
-    return {
-      visible,
-    }
-  },
-})
+const { modals, show } = useModals()
+const { visible, dismiss } = useOverlay()
+const { createModal } = useCreateModal()
 </script>
 
 <style scoped>
@@ -36,12 +39,13 @@ export default defineComponent({
   width: 100%;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(5px);
 }
 
-.modal {
-  width: 40vw;
-  height: 30vw;
-  background-color: rgba(255, 255, 255, 1);
-  border: 1px solid rgba(196, 196, 196, 1);
+.overlay > .center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 </style>
