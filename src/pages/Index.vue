@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { useCreateModal, useModals } from '~/composables/modal'
+import { useOverlay } from '~/composables/overlay'
+import ModalWindow from '~/components/ModalWindow.vue'
+
+const { modals, show } = useModals()
+const { visible, dismiss } = useOverlay()
+const { createModal } = useCreateModal()
+</script>
+
 <template>
   <img alt="Vue logo" src="/~/assets/logo.png" />
   <button @click="show" :disabled="modals.length === 0">モーダルを開く</button>
@@ -16,16 +26,6 @@
     </div>
   </teleport>
 </template>
-
-<script setup lang="ts">
-import { useCreateModal, useModals } from '~/composables/modal'
-import { useOverlay } from '~/composables/overlay'
-import ModalWindow from '~/components/ModalWindow.vue'
-
-const { modals, show } = useModals()
-const { visible, dismiss } = useOverlay()
-const { createModal } = useCreateModal()
-</script>
 
 <style scoped>
 .overlay {

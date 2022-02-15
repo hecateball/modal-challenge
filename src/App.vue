@@ -1,10 +1,3 @@
-<template>
-  <div class="container">
-    <RouterView />
-  </div>
-  <section id="modal" />
-</template>
-
 <script setup lang="ts">
 import { useProvideModals } from '~/composables/modal'
 import { useProvideOverlay } from '~/composables/overlay'
@@ -15,6 +8,13 @@ const { modals } = provideModals()
 const { provideOverlay } = useProvideOverlay(modals)
 provideOverlay()
 </script>
+
+<template>
+  <div class="container">
+    <RouterView />
+  </div>
+  <div id="modal" />
+</template>
 
 <style>
 #app {

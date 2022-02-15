@@ -1,10 +1,3 @@
-<template>
-  <div class="modal" @click.stop>
-    <h2>{{ name }}</h2>
-    <button @click="dismiss">閉じる</button>
-  </div>
-</template>
-
 <script setup lang="ts">
 import { defineProps } from 'vue'
 import { useModal } from '~/composables/modal'
@@ -18,6 +11,13 @@ const props = defineProps({
 
 const { dismiss } = useModal(props.name)
 </script>
+
+<template>
+  <div class="modal" @click.stop>
+    <h2>{{ name }}</h2>
+    <button @click="dismiss">閉じる</button>
+  </div>
+</template>
 
 <style scoped>
 .modal {
